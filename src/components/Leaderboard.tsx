@@ -12,8 +12,11 @@ export default function Leaderboard() {
       </div>
 
       <div className="flex flex-col py-3 px-2 gap-[10px]">
-        {leaderBoardData.map((item) => (
-          <div className="flex justify-between bg-[#76777A] py-2 px-4 rounded-md">
+        {leaderBoardData.map((item, index) => (
+          <div
+            className="flex justify-between bg-[#76777A] py-2 px-4 rounded-md"
+            key={`${item.name}-${index}`}
+          >
             <span className="text-lg text-black font-semibold">{item.id}</span>
             <span className="text-lg text-black font-semibold">
               {item.name}

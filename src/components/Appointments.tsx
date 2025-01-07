@@ -6,8 +6,11 @@ export default function Appointments() {
       <h5 className="text-center text-2xl text-white">Appointments</h5>
 
       <div className="flex flex-col py-3 px-2 gap-[10px]">
-        {appointments.map((item) => (
-          <div className="flex justify-between bg-[#76777A] py-2 px-4 rounded-md">
+        {appointments.map((item, index) => (
+          <div
+            className="flex justify-between bg-[#76777A] py-2 px-4 rounded-md"
+            key={`${item.name}-${index}`}
+          >
             <span className="text-lg text-black font-semibold">
               {item.name}
             </span>

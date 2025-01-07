@@ -35,8 +35,9 @@ export default function WeeklyState() {
               </button>
             </div>
             <div className="flex flex-col gap-[9px] ">
-              {weeklyStateData.map((item) => (
+              {weeklyStateData.map((item, index) => (
                 <WeeklyStateData
+                  key={`${item.name}-${index}`}
                   name={item.name}
                   signed={item.signed}
                   installed={item.installed}
