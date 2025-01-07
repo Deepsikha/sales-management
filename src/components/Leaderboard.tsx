@@ -1,25 +1,26 @@
-export default function Leaderboard() {
-  const leaders = [
-    { name: "Jose Cuevas", value: 69 },
-    { name: "Vic Gutierrez", value: 57 },
-    { name: "Sam Peake", value: 52 },
-    { name: "Ian Atkinson", value: 42 },
-    { name: "Gadiel Durant", value: 41 },
-  ];
+import { agreementData, chipList, leaderBoardData } from "@/utils/constant";
 
+import SelectionChips from "./sharedComponent/SelectionChips";
+
+export default function Leaderboard() {
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold text-white">Leaderboard</h2>
-      <div className="bg-gray-800 p-4 rounded-md mt-4">
-        {leaders.map((leader, index) => (
-          <div
-            key={leader.name}
-            className="flex justify-between py-2 text-gray-300 border-b border-gray-700"
-          >
-            <span>
-              {index + 1}. {leader.name}
+    <div className="bg-[#2A2B32] rounded-[10px] pt-2 pb-6 px-7 gap-2 h-full">
+      <h5 className="text-center text-2xl text-white mb-2">Leaderboard</h5>
+      <div className="flex flex-col gap-2 justify-center items-center">
+        <SelectionChips chipsList={chipList} />
+        <SelectionChips chipsList={agreementData} />
+      </div>
+
+      <div className="flex flex-col py-3 px-2 gap-[10px]">
+        {leaderBoardData.map((item) => (
+          <div className="flex justify-between bg-[#76777A] py-2 px-4 rounded-md">
+            <span className="text-lg text-black font-semibold">{item.id}</span>
+            <span className="text-lg text-black font-semibold">
+              {item.name}
             </span>
-            <span>{leader.value}</span>
+            <span className="text-lg text-black font-semibold">
+              {item.point}
+            </span>
           </div>
         ))}
       </div>

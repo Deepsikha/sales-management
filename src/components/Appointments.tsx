@@ -1,24 +1,21 @@
-export default function Appointments() {
-  const appointments = [
-    { name: "Elvis Presley", date: "9/16", time: "2:00pm" },
-    { name: "Riley Reid", date: "9/16", time: "4:00pm" },
-    { name: "John Smith", date: "9/17", time: "2:30pm" },
-    { name: "Jason Born", date: "9/17", time: "3:30pm" },
-    { name: "Jorge Clone", date: "9/18", time: "7:00pm" },
-  ];
+import { appointments } from "@/utils/constant";
 
+export default function Appointments() {
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold text-white">Appointments</h2>
-      <div className="bg-gray-800 p-4 rounded-md mt-4">
-        {appointments.map((appt) => (
-          <div
-            key={appt.name}
-            className="flex justify-between py-2 text-gray-300 border-b border-gray-700"
-          >
-            <span>{appt.name}</span>
-            <span>
-              {appt.date} {appt.time}
+    <div className="bg-[#2A2B32] rounded-[10px] pt-2 pb-6 px-7 gap-2 h-full">
+      <h5 className="text-center text-2xl text-white">Appointments</h5>
+
+      <div className="flex flex-col py-3 px-2 gap-[10px]">
+        {appointments.map((item) => (
+          <div className="flex justify-between bg-[#76777A] py-2 px-4 rounded-md">
+            <span className="text-lg text-black font-semibold">
+              {item.name}
+            </span>
+            <span className="text-lg text-black font-semibold">
+              {item.date}
+            </span>
+            <span className="text-lg text-black font-semibold">
+              {item.time}
             </span>
           </div>
         ))}

@@ -1,9 +1,17 @@
 "use client";
+
+import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { FaHome, FaTrophy, FaUser, FaBook, FaSignOutAlt } from "react-icons/fa";
+
 import Logo from "../../public/logo.png";
+
+import DashboardIcon from "./iconComponent/DashboardIcon";
+import LeaderBoard from "./iconComponent/LeaderBoardIcon";
+import ProfileIcon from "./iconComponent/ProfileIcon";
+import ResourceIcon from "./iconComponent/ResourceIcon";
+import SignOut from "./iconComponent/SignOutIcon";
 
 export default function Sidebar() {
   const [active, setActive] = useState("Dashboard");
@@ -11,8 +19,8 @@ export default function Sidebar() {
   const menuItems = [
     {
       name: "Dashboard",
-      path: "/dashboard",
-      icon: FaHome,
+      path: "/",
+      icon: DashboardIcon,
       subMenu: [
         { name: "Setter", path: "/dashboard/setter" },
         { name: "Sales Rep", path: "/dashboard/sales-rep" },
@@ -23,16 +31,16 @@ export default function Sidebar() {
         { name: "Office Admin", path: "/dashboard/office-admin" },
       ],
     },
-    { name: "Leaderboard", path: "/leaderboard", icon: FaTrophy },
-    { name: "Profile", path: "/profile", icon: FaUser },
-    { name: "Resources", path: "/resources", icon: FaBook },
-    { name: "Signout", path: "/login", icon: FaSignOutAlt },
+    { name: "Leaderboard", path: "/leaderboard", icon: LeaderBoard },
+    { name: "Profile", path: "/profile", icon: ProfileIcon },
+    { name: "Resources", path: "/resources", icon: ResourceIcon },
+    { name: "Signout", path: "/", icon: SignOut },
   ];
 
   return (
-    <div className="min-w-64 flex flex-col flex-1 h-full">
+    <div className="min-w-64 w-full flex flex-col flex-1 h-full">
       <div className="p-4 text-2xl font-bold mx-auto">
-        <Image src={Logo} alt={"logo"} />
+        <Image src={Logo} alt={"logo"} priority />
       </div>
       <nav className="flex-1 overflow-auto border-r pt-10 pl-[23px] pr-3 border-[#00D0EB]">
         {menuItems.map((item) => (

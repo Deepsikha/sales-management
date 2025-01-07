@@ -32,7 +32,7 @@ export default function RootLayout({
       >
         <div className="flex h-[calc(100vh-64px)] overflow-hidden bg-black ">
           <Sidebar />
-          <main className="w-full">
+          <main className="w-full flex flex-col h-full">
             <DashboardHeader />
             {children}
           </main>
