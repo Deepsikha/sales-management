@@ -52,7 +52,7 @@ export default function Sidebar(props: sidebarProps) {
       setActive((prev) => (prev === item.name ? "Dashboard" : item.name));
       toggleSidebar?.();
     }
-  }, []);
+  }, [toggleSidebar]);
 
   return (
     <div
