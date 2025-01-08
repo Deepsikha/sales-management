@@ -10,15 +10,15 @@ const WeeklyStateData: React.FC<WeeklyStateData> = ({
   installed,
 }) => {
   return (
-    <div className="bg-[#76777A] rounded-md py-2 px-4 flex justify-between items-center">
+    <div className="bg-[#76777A] rounded-md py-2 p-2 sm:px-4 flex justify-between items-center">
       <span className="flex-1">
-        <h5 className="text-lg text-black font-semibold px-4">{name}</h5>
+        <h5 className="text-sm sm:text-lg text-black font-semibold px-1 sm:px-4">{name}</h5>
       </span>
       <div className="flex justify-start max-w-[170px] w-full">
-        <h5 className="text-lg text-black max-w-[80px] w-full font-semibold px-4 text-right">
+        <h5 className="text-sm sm:text-lg text-black max-w-[80px] w-full font-semibold px-2 sm:px-4 text-right">
           {signed}
         </h5>
-        <h5 className="text-lg text-black max-w-[80px] w-full font-semibold px-4 text-right">
+        <h5 className="text-sm sm:text-lg text-black max-w-[80px] w-full font-semibold px-2 sm:px-4 text-right">
           {installed}
         </h5>
       </div>

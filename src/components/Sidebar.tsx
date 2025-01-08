@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 
+import useMedia from "@/hooks/useMedia";
+
 import Logo from "../../public/logo.png";
+import MobileLogo from "../../public/MobileLogo.png";
 
 import DashboardIcon from "./iconComponent/DashboardIcon";
 import LeaderBoard from "./iconComponent/LeaderBoardIcon";
@@ -13,7 +16,14 @@ import ProfileIcon from "./iconComponent/ProfileIcon";
 import ResourceIcon from "./iconComponent/ResourceIcon";
 import SignOut from "./iconComponent/SignOutIcon";
 
-export default function Sidebar() {
+type sidebarProps = {
+  isOpen: boolean;
+  toggleSidebar: () => void;
+};
+
+export default function Sidebar(props: sidebarProps) {
+  const { isOpen, toggleSidebar } = props;
+  const { isMobile } = useMedia();
   const [active, setActive] = useState("Dashboard");
 
   const menuItems = [
@@ -37,12 +47,31 @@ export default function Sidebar() {
     { name: "Signout", path: "/", icon: SignOut },
   ];
 
+  const handleMenuItemClick = useCallback((item: any) => {
+    {
+      setActive((prev) => (prev === item.name ? "Dashboard" : item.name));
+      toggleSidebar?.();
+    }
+  }, []);
+
   return (
-    <div className="min-w-64 w-full flex flex-col flex-1 h-full">
-      <div className="p-4 text-2xl font-bold mx-auto">
-        <Image src={Logo} alt={"logo"} priority />
+    <div
+      className={`max-w-60 md:min-w-64 md:w-full fixed left-0 border-[#00D0EB] border-r md:border-none bg-black md:relative md:flex flex-col flex-1 h-full transition-all duration-500 ease-in-out ${
+        isMobile && !isOpen
+          ? "-translate-x-full opacity-0"
+          : "translate-x-0 opacity-100 "
+        }`}
+    >
+      <div className="pt-5 p-2 md:p-4 text-2xl font-bold mx-auto">
+        <Image className="hidden md:flex" src={Logo} alt={"logo"} priority />
+        <Image
+          className="flex md:hidden"
+          src={MobileLogo}
+          alt={"logom"}
+          priority
+        />
       </div>
-      <nav className="flex-1 overflow-auto border-r pt-10 pl-[23px] pr-3 border-[#00D0EB]">
+      <nav className="flex-1 overflow-auto border-none md:border-r pt-5 sm:pt-10 pl-[23px] pr-3 md:border-[#00D0EB]">
         {menuItems.map((item) => (
           <div key={item.name}>
             <Link
@@ -52,7 +81,9 @@ export default function Sidebar() {
                   ? "bg-[#00D0EB] !text-[#171821] !font-semibold text-base"
                   : ""
               }`}
-              onClick={() => setActive(item.name)}
+              onClick={() => {
+                handleMenuItemClick(item);
+              }}
             >
               <div
                 className={"w-6 h-6 min-w-6 flex items-center justify-center"}
@@ -65,13 +96,20 @@ export default function Sidebar() {
               </div>
               {item.name}
             </Link>
-            {item.subMenu && active === item.name && (
-              <div className="ml-9 mt-2">
+            {item.subMenu && (
+              <div
+                className={`ml-8 transition-all duration-500 ease-in-out overflow-hidden ${
+                  active === item.name
+                    ? "max-h-screen opacity-100 my-2 "
+                    : "max-h-0 opacity-0 "
+                }`}
+              >
                 {item.subMenu.map((subItem) => (
                   <Link
                     key={subItem.name}
                     href={subItem.path}
-                    className="flex font-medium text-base text-[#87888C] py-2 px-3 hover:bg-[#00D0EB] hover:text-black rounded-md transition-colors"
+                    onClick={toggleSidebar}
+                    className="block font-medium text-base text-[#87888C] py-2 px-3 hover:bg-[#00D0EB] hover:text-black rounded-md transition-colors"
                   >
                     {subItem.name}
                   </Link>
