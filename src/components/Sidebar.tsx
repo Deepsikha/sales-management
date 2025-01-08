@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import React, { ElementType, JSX, useCallback, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -21,12 +21,19 @@ type sidebarProps = {
   toggleSidebar: () => void;
 };
 
+type menuItemType = {
+  name: string;
+  path: string;
+  icon?: React.ElementType;
+  subMenu?: menuItemType[];
+};
+
 export default function Sidebar(props: sidebarProps) {
   const { isOpen, toggleSidebar } = props;
   const { isMobile } = useMedia();
   const [active, setActive] = useState("Dashboard");
 
-  const menuItems = [
+  const menuItems: menuItemType[] = [
     {
       name: "Dashboard",
       path: "/",
@@ -47,12 +54,15 @@ export default function Sidebar(props: sidebarProps) {
     { name: "Signout", path: "/", icon: SignOut },
   ];
 
-  const handleMenuItemClick = useCallback((item: any) => {
-    {
-      setActive((prev) => (prev === item.name ? "Dashboard" : item.name));
-      toggleSidebar?.();
-    }
-  }, [toggleSidebar]);
+  const handleMenuItemClick = useCallback(
+    (item: menuItemType) => {
+      {
+        setActive((prev) => (prev === item.name ? "Dashboard" : item.name));
+        toggleSidebar?.();
+      }
+    },
+    [toggleSidebar]
+  );
 
   return (
     <div
@@ -60,7 +70,7 @@ export default function Sidebar(props: sidebarProps) {
         isMobile && !isOpen
           ? "-translate-x-full opacity-0"
           : "translate-x-0 opacity-100 "
-        }`}
+      }`}
     >
       <div className="pt-5 p-2 md:p-4 text-2xl font-bold mx-auto">
         <Image className="hidden md:flex" src={Logo} alt={"logo"} priority />
@@ -88,11 +98,13 @@ export default function Sidebar(props: sidebarProps) {
               <div
                 className={"w-6 h-6 min-w-6 flex items-center justify-center"}
               >
-                <item.icon
-                  className={`text-lg ${
-                    active === item.name ? "text-black" : "text-white"
-                  }`}
-                />
+                {item.icon && (
+                  <item.icon
+                    className={`text-lg ${
+                      active === item.name ? "text-black" : "text-white"
+                    }`}
+                  />
+                )}
               </div>
               {item.name}
             </Link>
