@@ -26,7 +26,7 @@ export default function WeeklyState() {
             </div>
           </div>
           <div className="flex flex-col flex-1 gap-2">
-            <div className="flex  max-w-[170px] w-full ml-auto border border-black rounded-lg overflow-hidden justify-end items-start">
+            <div className="flex  max-w-[160px] w-full ml-auto border border-black rounded-lg overflow-hidden justify-end items-start">
               <button className="flex bg-[#76777A] text-white text-sm font-semibold py-2 px-4 border-r border-black">
                 <h5>Signed</h5>
               </button>

@@ -14,7 +14,7 @@ export default function StatsGrid() {
             key={stat.label}
             className="bg-[#00D0EB] text-center py-4 rounded-[15px] flex flex-col flex-1 h-full"
           >
-            <p className=" text-xs md:text-base font-medium md:font-bold text-white">{stat.label}</p>
+            <p className=" text-xs md:text-base 2xl:text-xl font-medium md:font-bold text-white">{stat.label}</p>
             <h3 className="text-4xl lg:text-8xl text-white flex-1 flex justify-center items-center">
               {stat.value}
             </h3>

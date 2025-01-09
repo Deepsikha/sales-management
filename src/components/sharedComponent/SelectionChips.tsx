@@ -14,7 +14,7 @@ const SelectionChips: React.FC<SelectionChips> = ({ chipsList }) => {
         return (
           <button
             key={`${item}-${index}`}
-            className={`py-2 px-2 md:px-4 ${
+            className={`py-1 px-2 md:px-4 ${
               index === 0 && "rounded-tl-[10px] rounded-bl-[10px]"
             } ${
               index === chipsList.length - 1 &&
